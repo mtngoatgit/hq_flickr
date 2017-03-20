@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app='flickrApp'>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HQ Flickr</title>
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Flamenco" rel="stylesheet">
+    <script src="https://use.fontawesome.com/dc011d5e38.js"></script>
+    <link rel="stylesheet" href="/styles/normalize.css">
+    <link rel="stylesheet" href="/styles/reset.css">
+    <link rel="stylesheet" href="/styles/styles.css">
+  </head>
+  <body ng-controller="flickrCtrl">
+
+    <div class="header">
+      <div class="title">
+        <div class="title__icon">
+          <i class="fa fa-camera-retro fa-5x icon--edit"></i>
+        </div>
+        <div class="title__main">
+          HQ Flickr Client
+        </div>
+        <div class="title__sub">
+          search photos from the flickr database
+        </div>
+      </div>
+
+
+      <div class="search">
+        <div class="search__inner">
+        <form class="" >
+          <input id="search__input" class="search__input" ng-model="search.term" required>
+          <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+          tabindex="-1" ng-click="postSearch(search.term)">
+            <button class="search__submit" type="button" placeholder="Search" ng-click="postSearch(search.term)">
+              <i class="fa fa-search fa-2x fa-flip-horizontal" aria-hidden="true"></i>
+            </button>
+        </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="display">
+      <div class="display__notfound">{{ notfound }}</div>
+      <div class="display__searchterm">{{ photos[0].searchterm }}</div>
+      <div class="display__items" ng-repeat="photo in photos">
+        <a href="https://www.flickr.com/photos/{{photo.owner}}/{{photo.flick_id}}" target="_blank">
+          <img ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.flick_id}}_{{photo.secret}}.jpg"   alt="images">
+        </a>
+      </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-dialog/0.6.2/js/ngDialog.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/mainCtrl.js"></script>
+    <script src="app/mainSrvc.js"></script>
+    </body>
+</html>
